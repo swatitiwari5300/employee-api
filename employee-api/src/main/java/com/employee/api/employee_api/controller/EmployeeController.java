@@ -16,7 +16,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable int id){
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeById(id));
     }
