@@ -28,8 +28,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<EmployeeDTO>> getPaginatedEmployees(){
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getPaginatedEmployees());
+    public ResponseEntity<List<EmployeeDTO>> getPaginatedEmployees(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size){
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getPaginatedEmployees(page, size));
     }
 
 

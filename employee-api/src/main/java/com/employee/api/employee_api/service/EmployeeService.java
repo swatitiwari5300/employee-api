@@ -1,6 +1,7 @@
 package com.employee.api.employee_api.service;
 
 import com.employee.api.employee_api.dto.EmployeeDTO;
+import com.employee.api.employee_api.exception.EmployeeNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +17,18 @@ public class EmployeeService {
     }
 
     public EmployeeDTO getEmployeeById(int id){
-        return EmployeeDTO.builder().build();
+        EmployeeDTO employeeDTO = employeeDTOList
+                .stream()
+                .filter(emp -> emp.getId()==id)
+                .findAny()
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found with the given id"));
+        return employeeDTO;
     }
 
-    public List<EmployeeDTO> getPaginatedEmployees(){
-        return new ArrayList<>();
+    public List<EmployeeDTO> getPaginatedEmployees(int page, int size){
+        int start = page * size;
+        int end = Math.min(start+size, employeeDTOList.size());
+
+        return employeeDTOList.subList(start, end);
     }
 }
