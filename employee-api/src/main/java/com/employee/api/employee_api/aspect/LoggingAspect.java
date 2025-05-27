@@ -16,7 +16,6 @@ public class LoggingAspect {
     @Before("appMethods()")
     public void beforeMethods(JoinPoint joinPoint){
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-
         log.info("Method Signature: {}", methodSignature);
     }
 
